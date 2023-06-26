@@ -55,6 +55,12 @@ export type EmitsToProps<T extends EmitsOptions> = T extends string[]
     }
   : {}
 
+export type ShortEmitsToObject<E> = E extends Record<string, any[]>
+  ? {
+      [K in keyof E]: (...args: E[K]) => any
+    }
+  : E
+
 export type EmitFn<
   Options = ObjectEmitsOptions,
   Event extends keyof Options = keyof Options
@@ -66,6 +72,8 @@ export type EmitFn<
       {
         [key in Event]: Options[key] extends (...args: infer Args) => any
           ? (event: key, ...args: Args) => void
+          : Options[key] extends any[]
+          ? (event: key, ...args: Options[key]) => void
           : (event: key, ...args: any[]) => void
       }[Event]
     >
