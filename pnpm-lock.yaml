@@ -217,9 +217,6 @@ importers:
       '@babel/types':
         specifier: ^7.22.19
         version: 7.22.19
-      '@types/estree':
-        specifier: ^0.0.52
-        version: 0.0.52
       '@types/lru-cache':
         specifier: ^5.1.1
         version: 5.1.1
